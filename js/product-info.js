@@ -7,7 +7,13 @@ function mostrarNomb() {
 mostrarNomb()
 
 
-var veichulo = {};
+/*-----------------INFORMACION-----------------------*/
+
+
+var vehiculo = {};
+var comentarios = [];
+
+
 
 function mostrarInfoAuto(autos) {
 
@@ -29,11 +35,13 @@ function mostrarInfoAuto(autos) {
 }
 
 
-document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
 
-        if (resultObj.status === "ok") {
-            let veichulo = resultObj.data;
+
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCT_INFO_URL).then(function (info) {
+
+        if (info.status === "ok") {
+            let vehiculo = info.data;
 
             let nombAuto = document.getElementById("nombAuto");
             let descAuto = document.getElementById("descAuto");
@@ -42,71 +50,118 @@ document.addEventListener("DOMContentLoaded", function (e) {
             let cateAuto = document.getElementById("cateAuto");
 
 
-            nombAuto.innerHTML = veichulo.name;
-            descAuto.innerHTML = veichulo.description;
-            vendAuto.innerHTML = veichulo.soldCount;
-            costAuto.innerHTML = veichulo.currency + veichulo.cost;
-            cateAuto.innerHTML = veichulo.category;
+            nombAuto.innerHTML = vehiculo.name;
+            descAuto.innerHTML = vehiculo.description;
+            vendAuto.innerHTML = vehiculo.soldCount;
+            costAuto.innerHTML = vehiculo.currency + vehiculo.cost;
+            cateAuto.innerHTML = vehiculo.category;
 
 
-
-            mostrarInfoAuto(veichulo.images);
+            mostrarInfoAuto(vehiculo.images);
+            /*mostrarProdRel(vehiculo.relatedProducts)*/
+            
+            
         }
 
-
-
     });
+
+   
+   
+    /*getJSONData(PRODUCTS_URL).then(function (resultObj) { 
+
+        if (resultObj.status === "ok") {
+
+
+
+            let relacionados = resultObj.data;
+            mostrarProdRel(relacionados);
+            
+            
+            
+            
+        }
+    });*/
 });
 
 
 
-var prodRel = [];
-function mostrarProdRel(prodRel){
-    
+
+
+/*function mostrarProdRel(array) { //TERMINAR PARA PROXIMA ENTREGA
+
     let listRelacionados = "";
-    for (let i = 0; i < prodRel.length; i++){
-        let rePro = prodRel[i];
-        {
+
+    for (let i = 0; i < vehiculo.relatedProducts.length; i++) {
+        let rePro = array[vehiculo.relatedProducts[i]];
+        
+        
             listRelacionados += `
         <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + rePro.imgSrc + `" alt="Onix">
-            </div>
+            
+                <img class="img-fluid img-thumbnail" src="` + rePro.imgSrc + `" alt=" ` + rePro.name + `">
+                <p> ` + rePro.name + `</p>
+            
         </div>
         `
-        }
+        
 
         document.getElementById("productosRelacionados").innerHTML = listRelacionados;
     }
 
-}
-document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCTS_URL).then(function (resultObj) {
-
-        if (resultObj.status === "ok") {
-            
-
-            let relatedProducts = resultObj.data;
-            mostrarProdRel(relatedProducts);
-
-        }
-    });
-});
+}*/
 
 
 
 
 
+/*---------------------COMENTARIOS-------------------*/
 
-var comentarios = [];
 
 function mostrarComentarios(comentarios) {
 
     let listaComentarios = "";
     for (let i = 0; i < comentarios.length; i++) {
         let coment = comentarios[i];
+        let estrellas = "";
 
+        if (coment.score == 1) {
+            estrellas = `<span class="fa fa-star checked"></span>
+                             <span class="fa fa-star"></span>
+                             <span class="fa fa-star"></span>
+                             <span class="fa fa-star"></span>
+                             <span class="fa fa-star"></span>`
+        } else if (coment.score == 2) {
+            estrellas = `<span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star"></span>
+                             <span class="fa fa-star"></span>
+                             <span class="fa fa-star"></span>`
+
+        }
+        else if (coment.score == 3) {
+            estrellas = `<span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star"></span>
+                             <span class="fa fa-star"></span>`
+
+        } else if (coment.score == 4) {
+            estrellas = `<span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star"></span>`
+
+        } else if (coment.score == 5) {
+            estrellas = `<span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>
+                             <span class="fa fa-star checked"></span>`
+
+        }
         {
+
             listaComentarios += `
                     
                    
@@ -117,7 +172,7 @@ function mostrarComentarios(comentarios) {
                         <i> "`+ coment.description + `" </i>
                         </div>
                         <div>
-                            <p>` + coment.score + ` Estrellas</p>
+                            <p>Puntuación: ` + estrellas + ` </p>
                              <div>
                               <small class="text-muted">Fecha y hora del comentario: ` + coment.dateTime + ` </small>
                              </div>
@@ -133,10 +188,10 @@ function mostrarComentarios(comentarios) {
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (coments) {
+        if (coments.status === "ok") {
 
-            let comentario = resultObj.data;
+            let comentario = coments.data;
             mostrarComentarios(comentario);
         }
     });
