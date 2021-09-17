@@ -9,6 +9,7 @@ function enviarComentario(){
     var cajaComentarios = document.createElement("p");
     document.getElementById("listaComentarios").appendChild(cajaComentarios);
     cajaComentarios.innerHTML += insertComment;
+    document.getElementById("newComentario").value = "";
 
     
 }
