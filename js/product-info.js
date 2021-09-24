@@ -1,7 +1,7 @@
 function mostrarNomb() {
     var nombre = document.getElementById("usuariolog");
     var userName = JSON.parse(sessionStorage.getItem("user"));
-    nombre.innerHTML = `Bienvenido <font color="Olive"><strong>${userName.usuario}</strong></font> a e-mercado`;
+    nombre.innerHTML = `Bienvenido <font color="palegreen"><strong>${userName.usuario}</strong></font> a e-mercado`;
 }
 
 mostrarNomb()
@@ -30,6 +30,33 @@ function mostrarInfoAuto(autos) {
             </div>
         </div>
         `
+
+       /* `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="` + imageSrc + `" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="` + imageSrc + `" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="` + imageSrc + `" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="` + imageSrc + `" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>`*/
+
+        
 
         document.getElementById("imgVehi").innerHTML = imagenesVehiculo;
     }
@@ -69,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     
     
         
-document.addEventListener("DOMContentLoaded", function (e) {
+document.addEventListener("DOMContentLoaded", function (e) {  
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
 
             if (resultObj.status === "ok") {
@@ -90,10 +117,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 
-
-
-
-function mostrarProdRel(array) { 
+function mostrarProdRel(array) {        
 
     let listRelacionados = "";
 

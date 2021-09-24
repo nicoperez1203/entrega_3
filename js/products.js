@@ -13,7 +13,7 @@ var buscar = undefined; //Variable que nos servirá para buscar en tiempo real
 function mostrarNomb(){
     var nombre = document.getElementById("usuariolog");
     var userName = JSON.parse(sessionStorage.user); //Convertimos el valor almacenado en sessionStorage a un valor que pueda ser interpretado por js
-    nombre.innerHTML = `Bienvenido <font color="Olive"><strong>${userName.usuario}</strong></font> a e-mercado`; //Insertamos el nombre de usuario 
+    nombre.innerHTML = `Bienvenido <font color="palegreen"><strong>${userName.usuario}</strong></font> a e-mercado`; //Insertamos el nombre de usuario 
 }
 
 mostrarNomb()

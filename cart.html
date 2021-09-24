@@ -39,14 +39,19 @@
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="home.html">Home</a> <!-- Le agregue esta linea, para que agregue un boton que nos lleve a la pagina inicial en lugar del login -->
+      <a class="py-2 d-none d-md-inline-block" href="home.html">Home</a> 
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block" href="#" id="usuariolog"></a>
-      <a class="py-2 d-none d-md-inline-block" href="index.html" onclick="signOut()">Cerrar Sesion</a>
-    </div>
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="usuariolog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <a class="dropdown-item" href="index.html" onclick="signOut()">Cerrar Sesion</a>
+        </div>
+      </div>
+      </div>
   </nav>
   <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
